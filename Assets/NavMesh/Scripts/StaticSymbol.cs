@@ -7,8 +7,8 @@ public class StaticSymbol : MonoBehaviour
 {
     protected SymbolEnum? symbol;
 
-    public SymbolEnum CurrentSymbol {
-        get { return symbol.HasValue ? symbol.Value : SymbolEnum.Rock; }
+    public SymbolEnum? CurrentSymbol {
+        get { return symbol.HasValue ? symbol.Value : null; }
         protected set {
             symbol = value;
             quadRenderer.material = materials[(int) symbol.Value];
@@ -24,7 +24,7 @@ public class StaticSymbol : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start() {
         CurrentSymbol = GenerateRandomSymbol();
-
+            
     }
 
     protected SymbolEnum GenerateRandomSymbol() {
