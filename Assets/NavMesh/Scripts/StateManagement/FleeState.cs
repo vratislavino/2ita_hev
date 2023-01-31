@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FleeState : MonoBehaviour
+public class FleeState : State
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public override void DoStep() {
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override State TryToChangeState() {
+        throw new System.NotImplementedException();
     }
 }

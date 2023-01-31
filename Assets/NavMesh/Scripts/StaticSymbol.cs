@@ -21,6 +21,10 @@ public class StaticSymbol : MonoBehaviour
     [SerializeField]
     protected List<Material> materials;
 
+    private void Awake() {
+        DataHolder.Instance.AddEnemy(this);
+    }
+
     // Start is called before the first frame update
     protected virtual void Start() {
         CurrentSymbol = GenerateRandomSymbol();

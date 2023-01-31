@@ -13,8 +13,8 @@ public class IdleState : State
 
     float generateCooldown = 0;
 
-    public override void InitState(NavMeshAgent agent) {
-        base.InitState(agent);
+    public override void InitState(NavMeshAgent agent, StaticSymbol symbol) {
+        base.InitState(agent, symbol);
         SendEnemyToNextPoint();
     }
 
@@ -50,6 +50,17 @@ public class IdleState : State
     }
 
     public override State TryToChangeState() {
+        if(Vector3.Distance(DataHolder.Instance.Player.transform.position, agent.transform.position) < 10) {
+            if(DataHolder.Instance.Player.CurrentSymbol == symbol.CurrentSymbol) {
+                // do nothing, same symbols
+            } else {
+                if(DataHolder.Instance.Player.WouldEnemyWin(symbol.CurrentSymbol.Value)) {
+                    return new AttackState();
+                } else {
+                    return new FleeState();
+                }
+            }
+        }
         return null;
     }
 }
