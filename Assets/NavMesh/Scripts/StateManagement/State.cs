@@ -5,7 +5,12 @@ using UnityEngine.AI;
 
 public abstract class State
 {
-    public abstract void InitState(NavMeshAgent agent);
+
+    protected NavMeshAgent agent;
+
+    public virtual void InitState(NavMeshAgent agent) { 
+        this.agent = agent;
+    }
 
     public abstract State TryToChangeState();
 
