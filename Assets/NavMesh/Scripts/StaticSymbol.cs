@@ -25,6 +25,10 @@ public class StaticSymbol : MonoBehaviour
         DataHolder.Instance.AddEnemy(this);
     }
 
+    private void OnDestroy() {
+        DataHolder.Instance.RemoveEnemy(this);
+    }
+
     // Start is called before the first frame update
     protected virtual void Start() {
         CurrentSymbol = GenerateRandomSymbol();

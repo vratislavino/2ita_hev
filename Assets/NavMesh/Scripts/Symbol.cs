@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Symbol : StaticSymbol
 {
+    [SerializeField]
+    private float symbolDuration = 5;
+
     private void Awake() {
         DataHolder.Instance.SetPlayerReference(this);
     }
@@ -16,7 +19,7 @@ public class Symbol : StaticSymbol
 
     IEnumerator SwitchSymbol() {
         while (true) {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(symbolDuration);
             CurrentSymbol = GenerateRandomSymbol();
         }
     }
@@ -42,7 +45,6 @@ public class Symbol : StaticSymbol
         }
         return false;
     }
-
 }
 
 public enum SymbolEnum
