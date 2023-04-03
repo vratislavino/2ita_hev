@@ -11,8 +11,6 @@ public class PlayerMovement2D : MonoBehaviour
 
     [SerializeField]
     private float jumpForce;
-    [SerializeField]
-    private int maxJumps = 2;
 
     [SerializeField]
     private Transform groundCheck;
@@ -21,8 +19,7 @@ public class PlayerMovement2D : MonoBehaviour
     private LayerMask ignorePlayer;
 
     private bool isGrounded = false;
-    private int jumpCount;
-    private bool ableToJump = true;
+    private bool jumpedInAir = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -35,11 +32,9 @@ public class PlayerMovement2D : MonoBehaviour
             isGrounded = false;
         } else {
             isGrounded = true;
-            jumpCount = maxJumps;
+            jumpedInAir = false;
         }
     }
-
-    // DOUBLE JUMP JE TROCHU... TROOOOOOOooOŠIÈKU BUGGY :) 
 
     // Update is called once per frame
     void Update() {
@@ -55,21 +50,18 @@ public class PlayerMovement2D : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) {
-            if (jumpCount > 0 && ableToJump) {
-                StartCoroutine(ResetJump());
-                jumpCount--;
+            if (isGrounded) {
                 moveY = jumpForce;
-                //rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+            } else {
+                if (!jumpedInAir) {
+                    moveY = jumpForce;
+                    jumpedInAir = true;
+                }
             }
         }
 
         rigidbody.velocity = new Vector2(moveX, moveY);
         // referenèní a hodnotový datový typ - struct vs class
-    }
-
-    IEnumerator ResetJump() {
-        ableToJump = false;
-        yield return new WaitForSeconds(0.1f);
-        ableToJump = true;
     }
 }
