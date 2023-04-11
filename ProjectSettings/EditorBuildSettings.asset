@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Skakacka2D/GameScene.unity
+    guid: fcf96d1daa9eaed4f9ed09d335cfaed2
+  - enabled: 1
+    path: Assets/Skakacka2D/Level1.unity
+    guid: 3c5b0a124d6a7a949a7a3ebbafba895b
+  - enabled: 1
+    path: Assets/Skakacka2D/Level2.unity
+    guid: d813f4000c2b6c24591836c3978b678f
   m_configObjects: {}
