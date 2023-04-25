@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngineInternal;
 
@@ -71,5 +73,6 @@ public class PlayerMovement2D : MonoBehaviour
 
         rigidbody.velocity = new Vector2(moveX, moveY);
         // referenèní a hodnotový datový typ - struct vs class
+
     }
 }
