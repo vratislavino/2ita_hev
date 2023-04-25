@@ -13,7 +13,7 @@ public class PlayerMovement2D : MonoBehaviour
     private float jumpForce;
 
     [SerializeField]
-    private Transform groundCheck;
+    private List<Transform> groundChecks;
 
     [SerializeField]
     private LayerMask ignorePlayer;
@@ -27,13 +27,17 @@ public class PlayerMovement2D : MonoBehaviour
     }
 
     private void CheckIsGrounded() {
-        var hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, ignorePlayer);
-        if (hit.collider == null) {
-            isGrounded = false;
-        } else {
-            isGrounded = true;
-            jumpedInAir = false;
+        bool isHit = false;
+        for (int i = 0; i < groundChecks.Count; i++) {
+            var hit = Physics2D.Raycast(groundChecks[i].position, Vector2.down, 0.1f, ignorePlayer);
+            if (hit.collider == null) {
+                
+            } else {
+                isHit = true;
+                jumpedInAir = false;
+            }
         }
+        isGrounded = isHit;
     }
 
     // Update is called once per frame
@@ -48,7 +52,11 @@ public class PlayerMovement2D : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) {
             moveX = speed;
         }
-
+        /*
+            Jump
+            Speed
+            Zpomalení èasu
+         */
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) {
             if (isGrounded) {
                 moveY = jumpForce;
