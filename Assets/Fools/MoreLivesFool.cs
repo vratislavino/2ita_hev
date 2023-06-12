@@ -17,10 +17,14 @@ public class MoreLivesFool : NormalFool
     }
 
     protected override void ReactToClick() {
-        currentLives--;
+        MinusLife();
         if(currentLives == 0) {
             currentLives = maxLives;
             base.ReactToClick();
         }
+    }
+
+    protected virtual void MinusLife() {
+        currentLives--;
     }
 }

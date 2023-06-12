@@ -25,8 +25,11 @@ public class BorderGenerator : MonoBehaviour
             y = Mathf.Sin(uhel * Mathf.PI/180) * radius;
 
             g = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            g.GetComponent<Collider>().isTrigger = true;
             g.transform.position = new Vector3(x, 0.5f, y);
             g.transform.rotation = Quaternion.Euler(0, -uhel, 0);
+            //var rb = g.AddComponent<Rigidbody>();
+            
         }
     }
 }

@@ -9,10 +9,15 @@ public abstract class Fool : MonoBehaviour
 
     protected float currentAngle;
 
+    private Color originColor;
+    private MeshRenderer meshRenderer;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         GenerateAngle();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+        originColor = meshRenderer.material.color;
     }
 
     protected void ResetPosition() {
@@ -31,9 +36,8 @@ public abstract class Fool : MonoBehaviour
     }
 
     private void Hit() {
-        var mesh = GetComponentInChildren<MeshRenderer>();
-        mesh.material.color = Color.red;
-        LeanTween.color(mesh.gameObject, Color.white, .3f);
+        meshRenderer.material.color = Color.red;
+        LeanTween.color(meshRenderer.gameObject, originColor, .3f);
     }
 
     protected abstract void ReactToClick();
