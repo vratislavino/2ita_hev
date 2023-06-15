@@ -2,24 +2,36 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FoolSpawner : MonoBehaviour
 {
     private static FoolSpawner instance;
     public static FoolSpawner Instance => instance;
 
-
+    [SerializeField]
+    private GameObject deathScreen;    
+    
     [SerializeField]
     List<SpawnData> spawnData;
 
     List<Fool> fools = new List<Fool>();
+    bool spawning = false;
 
     private void Awake() {
         instance = this;
     }
 
     public void StopSpawn() {
-        StopAllCoroutines();
+        if (spawning) {
+            spawning = false;
+            deathScreen.SetActive(true);
+            StopAllCoroutines();
+        }
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // Start is called before the first frame update
@@ -27,6 +39,7 @@ public class FoolSpawner : MonoBehaviour
     {
         //SpawnFool();
         //InvokeRepeating("SpawnFool", 0, 3f);
+        spawning = true;
         StartCoroutine(SpawnFool());
     }
 
